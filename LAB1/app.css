@@ -1,11 +1,225 @@
-.center{
-    margin: 0 auto;
-    display: grid;
-    justify-content: center;
-}
+        :root {
+            --paper: #faf9f7;
+            --ink: #1a1a18;
+            --ink-light: #5a5a54;
+            --rule: #d8d5cf;
+            --accent: #2c2c28;
+        }
 
-.resume-container{
-    width: 60%;
-    height: 100vh;
-    
-}
+        body {
+            background-color: #e8e6e1;
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            color: var(--ink);
+            min-height: 100vh;
+            padding: 48px 0 64px;
+        }
+
+        .paper {
+            width: 60%;
+            margin: 0 auto;
+            background: var(--paper);
+            box-shadow:
+                0 1px 1px rgba(0,0,0,0.06),
+                0 4px 8px rgba(0,0,0,0.08),
+                0 12px 32px rgba(0,0,0,0.10),
+                0 0 0 0.5px rgba(0,0,0,0.06);
+            padding: 56px 64px 64px;
+        }
+
+        /* Header */
+        .cv-header {
+            border-bottom: 1.5px solid var(--ink);
+            padding-bottom: 24px;
+            margin-bottom: 36px;
+        }
+
+        .cv-name {
+            font-family: 'EB Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            line-height: 1.1;
+            margin: 0 0 4px;
+            color: var(--ink);
+        }
+
+        .cv-title {
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink-light);
+            margin: 0 0 16px;
+        }
+
+        .cv-address {
+            font-size: 0.82rem;
+            color: var(--ink-light);
+            letter-spacing: 0.02em;
+        }
+
+        /* Section */
+        .cv-section {
+            margin-bottom: 32px;
+        }
+
+        .cv-section-title {
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--ink-light);
+            margin-bottom: 14px;
+            padding-bottom: 7px;
+            border-bottom: 0.5px solid var(--rule);
+        }
+
+        /* Body text */
+        .cv-body {
+            font-size: 0.875rem;
+            line-height: 1.75;
+            color: var(--ink);
+        }
+
+        /* Education items */
+        .cv-item {
+            margin-bottom: 18px;
+        }
+
+        .cv-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .cv-date {
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            color: var(--ink-light);
+            margin-bottom: 2px;
+        }
+
+        .cv-institution {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--ink);
+            line-height: 1.3;
+        }
+
+        .cv-school {
+            font-size: 0.82rem;
+            color: var(--ink-light);
+            margin-top: 1px;
+        }
+
+        /* Skills grid */
+        .skills-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 32px;
+        }
+
+        .skill-item {
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .skill-label {
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: var(--ink);
+        }
+
+        .skill-value {
+            color: var(--ink-light);
+        }
+
+        /* Language table */
+        .cv-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            margin-top: 10px;
+        }
+
+        .cv-table thead tr {
+            border-bottom: 0.5px solid var(--rule);
+        }
+
+        .cv-table th {
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-light);
+            padding: 0 12px 8px 0;
+            text-align: left;
+        }
+
+        .cv-table td {
+            padding: 8px 12px 0 0;
+            color: var(--ink);
+            font-weight: 400;
+        }
+
+        .cv-table td:first-child {
+            font-weight: 500;
+        }
+
+        .cv-footnote {
+            font-size: 0.72rem;
+            color: var(--ink-light);
+            margin-top: 10px;
+        }
+
+        .lang-native {
+            font-size: 0.875rem;
+            margin-bottom: 10px;
+        }
+
+        .lang-native strong {
+            font-weight: 500;
+        }
+
+        .cv-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .cv-list li {
+            font-size: 0.875rem;
+            line-height: 1.7;
+            color: var(--ink);
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .cv-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--rule);
+        }
+
+        .cv-list li strong {
+            font-weight: 500;
+        }
+
+        @media (max-width: 900px) {
+            .paper {
+                width: 90%;
+                padding: 36px 32px 48px;
+            }
+            .skills-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .paper {
+                width: 100%;
+                box-shadow: none;
+                padding: 28px 20px 40px;
+            }
+        }
