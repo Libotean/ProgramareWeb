@@ -1,0 +1,11 @@
+.center{
+    margin: 0 auto;
+    display: grid;
+    justify-content: center;
+}
+
+.resume-container{
+    width: 60%;
+    height: 100vh;
+    
+}
