@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Board Games Hub - Laborator 2</title>
+</head>
+<body>
+
+<center>
+  <h1>Board Games Hub</h1>
+  <p><em>Aplicatie web pentru grupuri de prieteni care se intalnesc sa joace board games</em></p>
+  <img
+    src="imagini/chess.png"
+    alt="Board Game"
+    width="320"
+    height="200"
+    title="Board games night"
+  />
+</center>
+
+<hr>
+
+<div>
+  <b>Navigare:</b>
+  <a href="#despre"       target="_self"  title="Despre aplicatie">Despre</a> |
+  <a href="#istoric"      target="_self"  title="Istoricul partidelor">Istoric Partide</a> |
+  <a href="#clasament"    target="_self"  title="Clasament grup">Clasament</a> |
+  <a href="#vot"          target="_self"  title="Propune si voteaza joc">Vot Joc</a> |
+  <a href="#inregistrare" target="_self"  title="Inregistrare membru">Inregistrare</a> |
+  <a href="https://github.com" target="_blank" title="Codul sursa pe GitHub">GitHub</a>
+</div>
+
+<hr>
+
+<div id="despre">
+
+  <h2>Despre Aplicatie</h2>
+
+  <p>
+    <strong>Board Games Hub</strong> este o aplicatie web pentru grupuri de prieteni care se intalnesc
+    periodic pentru seri de board games. Aplicatia rezolva o problema simpla si concreta:
+    <b>ce joc jucam vineri seara?</b>
+  </p>
+
+  <p>
+    Membrii grupului pot <b>vota jocul saptamanii</b>, pot vedea
+    <b>istoricul partidelor</b> trecute si pot urmari cine este
+    <b>campionul grupului</b> la Catan, Sah sau orice alt board game.
+    <br>
+    Nu mai e nevoie de foi de hartie sau mesaje in grup, totul este centralizat intr-un singur loc.
+  </p>
+
+  <h3>Planul de dezvoltare</h3>
+
+  <h5>Pasi de implementare</h5>
+  <p>Cont de utilizator, votare joc saptamanal, inregistrare scoruri dupa partida, clasament grup.</p>
+  <p>Notificari pentru seara de joc (probabil), statistici detaliate per jucator si per joc, calendar seri.</p>
+
+</div>
+
+<hr>
+
+<div id="istoric">
+
+  <h2>Istoricul Partidelor</h2>
+
+  <p>
+    Tabelul de mai jos arata ultimele partide jucate de grup.
+    Fiecare partida are data, jocul jucat, participantii si campionul serii.
+  </p>
+
+  <table border="1" width="90%">
+    <tr bgcolor="#cccccc">
+      <th colspan="2" align="center">Partida</th>
+      <th align="center" valign="middle">Joc</th>
+      <th align="center" valign="middle">Data</th>
+      <th align="center" valign="middle">Jucatori</th>
+      <th align="center" valign="middle">Castigator</th>
+      <th align="center" valign="middle">Scor</th>
+      <th align="center" valign="middle">Durata</th>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">#12</td>
+      <td align="center" valign="middle">
+        <img
+          src="imagini/catan.jpg"
+          alt="Catan logo"
+          width="50"
+          height="35"
+          title="Catan"
+        />
+      </td>
+      <td align="center" valign="middle"><b>Catan</b></td>
+      <td align="center" valign="middle">07.03.2025</td>
+      <td align="center" valign="middle">Andrei, Maria, Vlad, Ioana</td>
+      <td align="center" valign="middle"><strong>Andrei</strong></td>
+      <td align="center" valign="middle">11 puncte</td>
+      <td align="center" valign="middle">95 min</td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">#11</td>
+      <td align="center" valign="middle">
+        <img
+          src="imagini/chess.png"
+          alt="Chess board"
+          width="50"
+          height="35"
+          title="Sah"
+        />
+      </td>
+      <td align="center" valign="middle"><b>Sah</b></td>
+      <td align="center" valign="middle">28.02.2025</td>
+      <td align="center" valign="middle">Vlad, Maria</td>
+      <td align="center" valign="middle"><strong>Maria</strong></td>
+      <td align="center" valign="middle">Mat in 32 mut.</td>
+      <td align="center" valign="middle">45 min</td>
+    </tr>
+      <td align="center" valign="middle">#9</td>
+      <td align="center" valign="middle">-</td>
+      <td align="center" valign="middle"><b>Catan</b></td>
+      <td align="center" valign="middle">14.02.2025</td>
+      <td align="center" valign="middle">Andrei, Ioana, Radu</td>
+      <td align="center" valign="middle"><strong>Ioana</strong></td>
+      <td align="center" valign="middle">10 puncte</td>
+      <td align="center" valign="middle">70 min</td>
+    </tr>
+  </table>
+
+  <br>
+  <p>
+    <a href="#vot" target="_self" title="Mergi la formularul de vot">Propune urmatorul joc &rarr;</a>
+  </p>
+
+</div>
+
+<hr>
+
+<div id="clasament">
+
+  <h2>Clasamentul Grupului</h2>
+
+  <p>Clasamentul se calculeaza automat pe baza partidelor inregistrate. Fiecare victorie aduce <b>3 puncte</b>, locul 2 aduce <b>1 punct</b>.</p>
+
+  <h3>Clasament general</h3>
+  <table border="1" width="60%">
+    <tr bgcolor="#cccccc">
+      <th align="center">Loc</th>
+      <th align="left">Jucator</th>
+      <th align="center" valign="middle">Victorii</th>
+      <th align="center" valign="middle">Partide jucate</th>
+      <th align="center" valign="middle">Puncte</th>
+    </tr>
+    <tr>
+      <td align="center"><b>1</b></td>
+      <td>Andrei</td>
+      <td align="center" valign="middle">4</td>
+      <td align="center" valign="middle">8</td>
+      <td align="center" valign="middle">14</td>
+    </tr>
+    <tr>
+      <td align="center"><b>2</b></td>
+      <td>Maria</td>
+      <td align="center" valign="middle">3</td>
+      <td align="center" valign="middle">9</td>
+      <td align="center" valign="middle">11</td>
+    </tr>
+    <tr>
+      <td align="center"><b>3</b></td>
+      <td>Radu</td>
+      <td align="center" valign="middle">2</td>
+      <td align="center" valign="middle">6</td>
+      <td align="center" valign="middle">8</td>
+    </tr>
+    <tr>
+      <td align="center"><b>4</b></td>
+      <td>Ioana</td>
+      <td align="center" valign="middle">2</td>
+      <td align="center" valign="middle">7</td>
+      <td align="center" valign="middle">7</td>
+    </tr>
+    <tr>
+      <td align="center"><b>5</b></td>
+      <td>Vlad</td>
+      <td align="center" valign="middle">1</td>
+      <td align="center" valign="middle">7</td>
+      <td align="center" valign="middle">4</td>
+    </tr>
+  </table>
+
+  <br>
+  <h3>Campioni pe joc</h3>
+  <ul>
+    <li><b>Catan:</b> Andrei (3 victorii din 5 partide)</li>
+    <li><b>Sah:</b> Maria (5 victorii din 7 partide)</li>
+  </ul>
+  <h3>Statistici rapide</h3>
+  <ol start="1">
+    <li>Cel mai jucat joc: <b>Catan</b> (5 partide)</li>
+    <li>Cea mai lunga partida: <b>Catan #3</b> - 140 minute</li>
+    <li>Cel mai activ jucator: <b>Maria</b> - 9 partide</li>
+    <li>Seara cu cei mai multi participanti: <b>21.02.2025</b> - 5 jucatori</li>
+  </ol>
+
+</div>
+
+<hr>
+<div id="vot">
+
+  <h2>Propune si Voteaza Jocul Saptamanii</h2>
+  <p>Foloseste formularul de mai jos pentru a propune un joc pentru vineri seara sau pentru a vota una dintre propunerile existente.</p>
+
+  <form name="vot_joc" action="#" method="post">
+    <fieldset>
+      <legend>Identifica-te</legend>
+      <label>Numele tau:
+        <input
+          type="text"
+          name="jucator_nume"
+          value=""
+          maxlength="40"
+          size="25"
+          title="Scrie numele tau din grup"
+        />
+      </label>
+      <br><br>
+      <label>Email (pentru notificare):
+        <input
+          type="email"
+          name="jucator_email"
+          value=""
+          maxlength="80"
+          size="30"
+          title="Vei primi o notificare cu jocul ales"
+        />
+      </label>
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>Voteaza jocul pentru vineri</legend>
+      <p>Selecteaza jocul pe care vrei sa il jucati vineri:</p>
+      <label><input type="radio" name="joc_vot" value="catan" checked />
+        <b>Catan</b> - 3 sau 4 jucatori
+      </label>
+      <br>
+      <label><input type="radio" name="joc_vot" value="sah" />
+        <b>Sah</b> - oricati jucatori
+      </label>
+      <br>
+      <label><input type="radio" name="joc_vot" value="altul" />
+        <b>Alt joc</b> (specifica mai jos)
+      </label>
+      <br><br>
+      <label>Propune alt joc (optional):
+        <input
+          type="text"
+          name="joc_propus"
+          value=""
+          maxlength="60"
+          size="30"
+          title="Scrie numele jocului pe care vrei sa il propui"
+        />
+      </label>
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>Detalii saptamana aceasta</legend>
+      <label>Poti participa vineri?
+        <select name="participare" size="1" title="Disponibilitatea ta pentru vineri">
+          <option value="">-- Selecteaza --</option>
+          <option value="da" selected>Da, voi fi prezent</option>
+          <option value="poate">Poate, depinde de program</option>
+          <option value="nu">Nu pot de data aceasta</option>
+        </select>
+      </label>
+      <br><br>
+      <label>Ora preferata de incepere:
+        <input
+          type="number"
+          name="ora_start"
+          value="19"
+          min="17"
+          max="22"
+          step="1"
+          size="3"
+          title="Ora la care preferi sa inceapa seara de joc (17-22)"
+        />
+        :00
+      </label>
+      <br><br>
+      <label>Numar jucatori preferat (selectie multipla):
+        <br>
+        <select name="nr_jucatori" multiple size="4" title="Selecteaza numarul de jucatori preferat">
+          <option value="2">2 jucatori</option>
+          <option value="3" selected>3 jucatori</option>
+          <option value="4" selected>4 jucatori</option>
+          <option value="5">5 jucatori</option>
+          <option value="6">6+ jucatori</option>
+        </select>
+      </label>
+      <small>(Tine apasat Ctrl pentru selectie multipla)</small>
+      <br><br>
+      <label><input type="checkbox" name="bring_snacks" value="1" checked /> Aduc gustari pentru seara</label>
+      <br>
+      <label><input type="checkbox" name="bring_game" value="1" /> Aduc eu jocul propus</label>
+      <br>
+      <label><input type="checkbox" name="new_player" value="1" disabled /> Aduc un prieten nou (probabil)</label>
+      <br><br>
+      <label>Mesaj pentru grup:
+        <br>
+        <textarea
+          name="mesaj_grup"
+          cols="50"
+          rows="4"
+          maxlength="300"
+          title="Scrie un mesaj sau o sugestie pentru restul grupului"
+        >Astept cu nerabdare seara de vineri!</textarea>
+      </label>
+      <br><br>
+      <label>Reguli grup (doar vizualizare):
+        <input
+          type="text"
+          name="house_rules"
+          value="Fara aliante secrete in Catan"
+          readonly
+          size="40"
+          title="Regulile grupului stabilite anterior"
+        />
+      </label>
+    </fieldset>
+    <br>
+    <center>
+      <input type="submit" value="Trimite votul" title="Trimite votul tau" />
+      &nbsp;&nbsp;
+      <input type="reset" value="Reseteaza formularul" title="Sterge toate campurile" />
+    </center>
+  </form>
+</div>
+
+<hr>
+
+<div id="inregistrare">
+
+  <h2>Inregistrare Membru Nou</h2>
+  <p>
+    Esti prieten cu cineva din grup si vrei sa te alturi?
+    Cere-i unui membru existent un <b>cod de invitatie</b> si completeaza formularul de mai jos.
+  </p>
+
+  <form name="inregistrare" action="#" method="post">
+
+    <fieldset>
+      <legend>Cont nou</legend>
+
+      <label>Nume de utilizator:
+        <input
+          type="text"
+          name="username"
+          value=""
+          maxlength="20"
+          size="20"
+          title="Alege un username unic, intre 4 si 20 de caractere"
+        />
+      </label>
+      <br><br>
+
+      <label>Email:
+        <input
+          type="email"
+          name="email"
+          value=""
+          maxlength="80"
+          size="30"
+          title="Adresa de email pentru contul tau"
+        />
+      </label>
+      <br><br>
+
+      <label>Varsta:
+        <input
+          type="number"
+          name="varsta"
+          value="18"
+          min="10"
+          max="99"
+          step="1"
+          size="4"
+          title="Varsta ta"
+        />
+      </label>
+      <br><br>
+
+      <label>Cod invitatie:
+        <input
+          type="text"
+          name="cod_invitatie"
+          value=""
+          maxlength="12"
+          size="14"
+          title="Codul primit de la un membru existent al grupului"
+        />
+      </label>
+      <br><br>
+
+      <label>ID grup (auto-completat):
+        <input
+          type="text"
+          name="grup_id"
+          value="BGH-GRP-001"
+          readonly
+          size="14"
+          title="ID-ul grupului din care faci parte"
+        />
+      </label>
+
+    </fieldset>
+
+    <br>
+
+    <fieldset>
+      <legend>Preferintele tale</legend>
+
+      <label>Jocul tau preferat:
+        <select name="joc_preferat" size="1" title="Jocul pe care il preferi cel mai mult">
+          <option value="">-- Alege --</option>
+          <option value="catan" selected>Catan</option>
+          <option value="sah">Sah</option>
+          <option value="altul">Altul</option>
+        </select>
+      </label>
+      <br><br>
+
+      <label>Zile disponibile (selectie multipla):
+        <br>
+        <select name="zile" multiple size="5" title="Selecteaza zilele in care esti disponibil">
+          <option value="lun">Luni</option>
+          <option value="mar">Marti</option>
+          <option value="mie">Miercuri</option>
+          <option value="joi">Joi</option>
+          <option value="vin" selected>Vineri</option>
+          <option value="sam" selected>Sambata</option>
+          <option value="dum">Duminica</option>
+        </select>
+      </label>
+      <br><br>
+      <label><input type="checkbox" name="accept_notif" value="1" checked /> Accept notificari prin email pentru serile de joc</label>
+      <br>
+      <label><input type="checkbox" name="accept_reguli" value="1" /> Am citit si accept regulile grupului</label>
+      <br>
+
+    </fieldset>
+    <br>
+
+    <center>
+      <input type="submit" value="Creeaza cont" title="Trimite formularul de inregistrare" />
+    </center>
+
+  </form>
+
+</div>
+
+<hr>
+
+</body>
+</html> 
