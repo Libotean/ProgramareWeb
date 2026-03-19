@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+</head>
+<body>
+
+<script>
+    alert("Ce faci aici?");
+    console.log("Iesi afara!!!");
+    document.write("Inca esti aici?");
+</script>
+
+<script>
+    var student = {
+        nume: 'Vasile',
+        an_studiu: 3,
+        medie: 9.50,
+        afisare: function() {
+            console.log(this.nume, this.an_studiu, this.medie);
+        }
+    };
+    student.afisare();
+</script>
+
+<script>
+    function calculeaza(a, b) {
+        var suma = a + b;
+        var produs = a * b;
+        console.log("Suma:", suma);
+        console.log("Produs:", produs);
+    }
+    calculeaza(5, 3);
+</script>
+
+<script>
+    var numere = [3, 7, 12, 5, 9, 1, 18, 4, 22, 6];
+
+    numere.forEach(function(n) {
+        console.log("Element:", n);
+    });
+
+    var duble = numere.map(function(n) {
+        return n * 2;
+    });
+    console.log("Duble:", duble);
+</script>
+
+<script>
+    var car = {
+        brand: "Toyota",
+        model: "Corolla",
+        an: 2022
+    };
+    console.log(car.brand, car.model, car.an);
+</script>
+
+<script>
+    var books = [
+        { title: 'Book',  author: 'Name'  },
+        { title: 'Book2', author: 'Name2' }
+    ];
+
+    function getTitles(books) {
+        return books.map(function(book) {
+            return book.title;
+        });
+    }
+    console.log(getTitles(books));
+</script>
+
+<script>
+</script>
+
+<h2>Formular</h2>
+<label>Nume: <input type="text" id="f-nume"></label><br><br>
+<label>Email: <input type="email" id="f-email"></label><br><br>
+<label>Varsta: <input type="number" id="f-varsta"></label><br><br>
+<button onclick="validateAndSave()">Trimite</button>
+<p id="rezultat"></p>
+
+<script>
+    function validateAndSave() {
+        var nume   = document.getElementById('f-nume').value.trim();
+        var email  = document.getElementById('f-email').value.trim();
+        var varsta = Number(document.getElementById('f-varsta').value);
+
+        if (!nume) {
+            alert("Numele este obligatoriu!");
+            return;
+        }
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            alert("Email invalid!");
+            return;
+        }
+        if (varsta < 1 || varsta > 120) {
+            alert("Varsta invalida!");
+            return;
+        }
+
+        var userData = { nume: nume, email: email, varsta: varsta };
+        console.log("Date salvate:", userData);
+    }
+</script>
+
+</body>
+</html>
