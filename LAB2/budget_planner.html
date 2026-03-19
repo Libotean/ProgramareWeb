@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Budget Planner - Laborator 2</title>
+</head>
+<body>
+
+<center>
+  <h1>Budget Planner</h1>
+  <p><em>Aplicatie web pentru planificarea si gestionarea bugetului personal sau de familie</em></p>
+  <img
+    src=""
+    alt=""
+    width="320"
+    height="200"
+    title="Planificarea bugetului personal"
+  />
+</center>
+
+<hr>
+
+<div>
+  <b>Navigare:</b>
+  <a href="#despre"    target="_self" title="Despre aplicatie">Despre</a> |
+  <a href="#categorii" target="_self" title="Categorii de buget">Categorii</a> |
+  <a href="#sumar"     target="_self" title="Sumar lunar">Sumar Lunar</a> |
+  <a href="#adauga"    target="_self" title="Adauga cheltuiala">Adauga Cheltuiala</a> |
+  <a href="#cont"      target="_self" title="Cont nou">Inregistrare</a>
+</div>
+
+<hr>
+
+<div id="despre">
+
+  <h2>Despre Aplicatie</h2>
+
+  <p>
+    <strong>Budget Planner</strong> este o aplicatie web care te ajuta sa iti planifici
+    cheltuielile lunare inainte ca banii sa fie deja cheltuiti. Spre deosebire de un
+    expense tracker care inregistreaza trecutul, <b>Budget Planner priveste inainte</b>:
+    stabilesti un plan, apoi urmaresti daca te incadrezi in el.
+  </p>
+
+  <p>
+    Aplicatia se adreseaza atat <b>persoanelor fizice</b> care vor sa scape de stresul
+    financiar de la sfarsitul lunii, cat si <b>familiilor</b> care vor sa economiseasca
+    impreuna pentru un obiectiv comun (vacanta, masina, fond de urgenta).
+    <br>
+    Totul functioneaza in browser, fara instalare, accesibil de pe orice dispozitiv.
+  </p>
+
+  <h3>Cum functioneaza</h3>
+
+  <ol start="1">
+    <li>Iti creezi un cont si introduci venitul lunar net</li>
+    <li>Aloci un buget pentru fiecare categorie de cheltuieli (chirie, mancare, transport etc.)</li>
+    <li>Pe parcursul lunii adaugi cheltuielile reale</li>
+    <li>Aplicatia iti arata in timp real cat ai mai ramas din fiecare categorie</li>
+    <li>La sfarsitul lunii primesti un raport si recomandari pentru luna urmatoare</li>
+  </ol>
+
+  <h3>Planul de dezvoltare</h3>
+
+  <h5>Faza 1</h5>
+  <p>Cont de utilizator, definire categorii de buget, adaugare cheltuieli, sumar lunar.</p>
+
+  <h5>Faza 2 - Rapoarte</h5>
+  <p>Grafice lunare, comparatie intre luni, alerte cand depasesti bugetul pe o categorie.</p>
+
+  <h6>Faza 3 - Avansat</h6>
+  <p>Import automat din extras de cont bancar, obiective de economii, aplicatie mobila PWA.</p>
+
+</div>
+
+<hr>
+
+<div id="categorii">
+
+  <h2>Categorii de Buget</h2>
+
+  <p>
+    Bugetul lunar este impartit in categorii. Tabelul de mai jos arata un exemplu de plan
+    bugetar pentru un venit net de <b>5000 lei/luna</b>, impreuna cu cheltuielile reale
+    inregistrate pana acum in luna curenta.
+  </p>
+
+  <table border="1" width="85%">
+    <tr bgcolor="#dddddd">
+      <th colspan="2" align="center">Categorie</th>
+      <th align="center" valign="middle">Buget alocat (lei)</th>
+      <th align="center" valign="middle">Cheltuit pana acum (lei)</th>
+      <th align="center" valign="middle">Ramas (lei)</th>
+      <th align="center" valign="middle">% utilizat</th>
+      <th align="center" valign="middle">Status</th>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">1</td>
+      <td><b>Chirie si utilitati</b></td>
+      <td align="center" valign="middle">1800</td>
+      <td align="center" valign="middle">1800</td>
+      <td align="center" valign="middle">0</td>
+      <td align="center" valign="middle">100%</td>
+      <td align="center" valign="middle"><strong>Complet</strong></td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">2</td>
+      <td><b>Mancare si cumparaturi</b></td>
+      <td align="center" valign="middle">900</td>
+      <td align="center" valign="middle">640</td>
+      <td align="center" valign="middle">260</td>
+      <td align="center" valign="middle">71%</td>
+      <td align="center" valign="middle">OK</td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">3</td>
+      <td><b>Transport</b></td>
+      <td align="center" valign="middle">400</td>
+      <td align="center" valign="middle">210</td>
+      <td align="center" valign="middle">190</td>
+      <td align="center" valign="middle">53%</td>
+      <td align="center" valign="middle">OK</td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">4</td>
+      <td><b>Sanatate</b></td>
+      <td align="center" valign="middle">300</td>
+      <td align="center" valign="middle">350</td>
+      <td align="center" valign="middle">-50</td>
+      <td align="center" valign="middle">117%</td>
+      <td align="center" valign="middle"><strong>Depasit!</strong></td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">5</td>
+      <td><b>Divertisment</b></td>
+      <td align="center" valign="middle">300</td>
+      <td align="center" valign="middle">95</td>
+      <td align="center" valign="middle">205</td>
+      <td align="center" valign="middle">32%</td>
+      <td align="center" valign="middle">OK</td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">6</td>
+      <td><b>Economii</b></td>
+      <td align="center" valign="middle">800</td>
+      <td align="center" valign="middle">800</td>
+      <td align="center" valign="middle">0</td>
+      <td align="center" valign="middle">100%</td>
+      <td align="center" valign="middle"><strong>Complet</strong></td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">7</td>
+      <td><b>Altele / Neprevazute</b></td>
+      <td align="center" valign="middle">500</td>
+      <td align="center" valign="middle">120</td>
+      <td align="center" valign="middle">380</td>
+      <td align="center" valign="middle">24%</td>
+      <td align="center" valign="middle">OK</td>
+    </tr>
+    <tr bgcolor="#eeeeee">
+      <td align="center" valign="middle" colspan="2"><b>TOTAL</b></td>
+      <td align="center" valign="middle"><b>5000</b></td>
+      <td align="center" valign="middle"><b>4015</b></td>
+      <td align="center" valign="middle"><b>985</b></td>
+      <td align="center" valign="middle"><b>80%</b></td>
+      <td align="center" valign="middle">-</td>
+    </tr>
+  </table>
+
+  <br>
+  <p>
+    <a href="#adauga" target="_self" title="Adauga o cheltuiala noua">+ Adauga cheltuiala noua</a>
+  </p>
+
+</div>
+
+<hr>
+
+<div id="sumar">
+
+  <h2>Sumar Lunar - Martie 2025</h2>
+
+  <p>Comparatie intre lunile recente. Valorile sunt in lei.</p>
+
+  <table border="1" width="70%">
+    <tr bgcolor="#dddddd">
+      <th align="left">Luna</th>
+      <th align="center" valign="middle">Venit</th>
+      <th align="center" valign="middle">Cheltuit</th>
+      <th align="center" valign="middle">Economisit</th>
+      <th align="center" valign="middle">Rata economii</th>
+    </tr>
+    <tr>
+      <td><b>Ianuarie 2025</b></td>
+      <td align="center" valign="middle">5000</td>
+      <td align="center" valign="middle">4320</td>
+      <td align="center" valign="middle">680</td>
+      <td align="center" valign="middle">13.6%</td>
+    </tr>
+    <tr>
+      <td><b>Februarie 2025</b></td>
+      <td align="center" valign="middle">5000</td>
+      <td align="center" valign="middle">4750</td>
+      <td align="center" valign="middle">250</td>
+      <td align="center" valign="middle">5%</td>
+    </tr>
+    <tr>
+      <td><b>Martie 2025</b></td>
+      <td align="center" valign="middle">5000</td>
+      <td align="center" valign="middle">4015</td>
+      <td align="center" valign="middle">985</td>
+      <td align="center" valign="middle">19.7%</td>
+    </tr>
+  </table>
+
+  <br>
+
+  <h3>Cele mai mari cheltuieli luna aceasta</h3>
+  <ol start="1">
+    <li>Chirie: <b>1500 lei</b> (03.03.2025)</li>
+    <li>Factura energie electrica: <b>300 lei</b> (05.03.2025)</li>
+    <li>Cumparaturi supermarket: <b>280 lei</b> (10.03.2025)</li>
+    <li>Consultatie medicala: <b>200 lei</b> (12.03.2025)</li>
+    <li>Abonament internet + telefon: <b>150 lei</b> (01.03.2025)</li>
+  </ol>
+
+  <h3>Sfaturi pentru luna viitoare</h3>
+  <ul>
+    <li>Categoria <b>Sanatate</b> a fost depasita cu 50 lei - mareste bugetul sau reduceti cheltuielile</li>
+    <li>Categoria <b>Divertisment</b> are inca 205 lei neutilizati - pot fi mutati la economii</li>
+    <li>Rata de economii din martie (19.7%) este cea mai buna din ultimele 3 luni</li>
+  </ul>
+
+</div>
+
+<hr>
+
+<div id="adauga">
+
+  <h2>Adauga Cheltuiala</h2>
+
+  <p>Completeaza formularul de mai jos pentru a inregistra o cheltuiala noua in luna curenta.</p>
+
+  <form name="adauga_cheltuiala" action="#" method="post">
+
+    <fieldset>
+      <legend>Detalii cheltuiala</legend>
+
+      <label>Descriere:
+        <input
+          type="text"
+          name="descriere"
+          value=""
+          maxlength="80"
+          size="35"
+          title="Ex: Cumparaturi Lidl, Factura curent, Abonament Netflix"
+        />
+      </label>
+      <br><br>
+
+      <label>Suma (lei):
+        <input
+          type="number"
+          name="suma"
+          value="0"
+          min="0"
+          max="99999"
+          step="0.01"
+          size="10"
+          title="Suma cheltuita in lei"
+        />
+      </label>
+      <br><br>
+
+      <label>Data:
+        <input
+          type="text"
+          name="data"
+          value="19.03.2025"
+          maxlength="10"
+          size="12"
+          title="Data cheltuielii in format ZZ.LL.AAAA"
+          readonly
+        />
+        <small>(completata automat cu data de azi)</small>
+      </label>
+      <br><br>
+
+      <label>Categorie
+        <select name="categorie" size="1" title="Selecteaza categoria cheltuielii">
+          <option value="">-- Alege categoria --</option>
+          <option value="chirie"     selected>Chirie si utilitati</option>
+          <option value="mancare"           >Mancare si cumparaturi</option>
+          <option value="transport"         >Transport</option>
+          <option value="sanatate"          >Sanatate</option>
+          <option value="divertisment"      >Divertisment</option>
+          <option value="economii"          >Economii</option>
+          <option value="altele"            >Altele / Neprevazute</option>
+        </select>
+      </label>
+      <br><br>
+
+      <label>Metoda de plata:
+        <select name="metoda" size="1" title="Cum ai platit aceasta cheltuiala">
+          <option value="card"  selected>Card bancar</option>
+          <option value="cash"          >Cash</option>                
+          <option value="transfer"      >Transfer bancar</option>
+          <option value="rate"          >Rate / Credit</option>
+        </select>
+      </label>
+
+    </fieldset>
+
+    <br>
+
+    <fieldset>
+      <legend>Optiuni suplimentare</legend>
+
+      <label>Etichete (selectie multipla):
+        <br>
+        <select name="etichete" multiple size="5" title="Adauga etichete pentru a filtra mai usor cheltuielile">
+          <option value="fix"      selected>Cheltuiala fixa lunara</option>
+          <option value="ocazional"        >Cheltuiala ocazionala</option>
+          <option value="urgent"           >Urgent / Neprevazut</option>
+          <option value="subscriptie"      >Subscriptie / Abonament</option>
+          <option value="investitie"       >Investitie</option>
+        </select>
+      </label>
+      <small>(Tine apasat Ctrl pentru selectie multipla)</small>
+      <br><br>
+
+      <label><input type="checkbox" name="recurent" value="1" /> Cheltuiala recurenta (se repeta lunar)</label>
+      <br>
+      <label><input type="checkbox" name="impartit" value="1" checked /> Impartit cu alta persoana</label>
+      <br>
+      <label><input type="checkbox" name="rambursabil" value="1" /> Urmeaza sa fie rambursat</label>
+      <br>
+      <label><input type="checkbox" name="export_csv" value="1" disabled /> Export automat CSV</label>
+      <br><br>
+
+      <label>Nota suplimentara:
+        <br>
+        <textarea
+          name="nota"
+          cols="50"
+          rows="3"
+          maxlength="250"
+          title="Adauga detalii suplimentare despre aceasta cheltuiala"
+        ></textarea>
+      </label>
+
+    </fieldset>
+
+    <br>
+
+    <center>
+      <input type="submit" value="Salveaza cheltuiala" title="Salveaza cheltuiala in bugetul tau" />
+      &nbsp;&nbsp;
+      <input type="reset" value="Anuleaza" title="Sterge toate campurile" />
+    </center>
+
+  </form>
+
+</div>
+
+<hr>
+
+<div id="cont">
+
+  <h2>Creeaza Cont Nou</h2>
+
+  <p>
+    Inregistreaza-te pentru a incepe sa iti planifici bugetul.
+    Datele tale sunt <b>private</b> si nu sunt impartite cu nimeni.
+  </p>
+
+  <form name="inregistrare" action="#" method="post">
+
+    <fieldset>
+      <legend>Date cont</legend>
+
+      <label>Nume de utilizator:
+        <input
+          type="text"
+          name="username"
+          value=""
+          maxlength="30"
+          size="25"
+          title="Alege un username unic"
+        />
+      </label>
+      <br><br>
+
+      <label>Email:
+        <input
+          type="email"
+          name="email"
+          value=""
+          maxlength="80"
+          size="30"
+          title="Adresa ta de email"
+        />
+      </label>
+      <br><br>
+
+      <label>Venit lunar net (lei):
+        <input
+          type="number"
+          name="venit"
+          value="0"
+          min="0"
+          max="999999"
+          step="100"
+          size="10"
+          title="Venitul tau lunar net in lei - folosit pentru calculul bugetului"
+        />
+      </label>
+    </fieldset>
+
+    <br>
+
+    <fieldset>
+      <legend>Preferinte buget</legend>
+
+      <label>Moneda principala:
+        <select name="moneda" size="1" title="Moneda in care iti gestionezi bugetul">
+          <option value="ron" selected>RON - Leu romanesc</option>
+          <option value="eur"         >EUR - Euro</option>
+          <option value="usd"         >USD - Dolar american</option>
+          <option value="gbp"         >GBP - Lira sterlina</option>
+        </select>
+      </label>
+      <br><br>
+
+      <label>Ziua de inceput a lunii bugetare:
+        <input
+          type="number"
+          name="ziua_start"
+          value="1"
+          min="1"
+          max="28"
+          step="1"
+          size="4"
+          title="Ziua din luna cand incepe perioada bugetara (1-28)"
+        />
+      </label>
+      <br><br>
+
+      <label>Categorii predefinite preferate (selectie multipla):
+        <br>
+        <select name="categorii_default" multiple size="5" title="Selecteaza categoriile pe care vrei sa le activezi">
+          <option value="chirie"      selected>Chirie si utilitati</option>
+          <option value="mancare"     selected>Mancare si cumparaturi</option>
+          <option value="transport"   selected>Transport</option>
+          <option value="sanatate"           >Sanatate</option>
+          <option value="divertisment"       >Divertisment</option>
+          <option value="educatie"           >Educatie</option>
+          <option value="economii"    selected>Economii</option>
+        </select>
+      </label>
+      <small>(Tine apasat Ctrl pentru selectie multipla)</small>
+      <br><br>
+
+      <p><b>Tipul de buget preferat:</b></p>
+      <label><input type="radio" name="tip_buget" value="50_30_20" checked /> Regula 50/30/20 (nevoi / dorinte / economii)</label>
+      <br>
+      <label><input type="radio" name="tip_buget" value="zero_based" /> Buget zero-based (fiecare leu are o destinatie)</label>
+      <br>
+      <label><input type="radio" name="tip_buget" value="personalizat" /> Personalizat (definesc eu categoriile)</label>
+      <br><br>
+
+      <label><input type="checkbox" name="alerte_email" value="1" checked /> Primesc alerte pe email cand depasesc bugetul</label>
+      <br>
+      <label><input type="checkbox" name="raport_lunar" value="1" checked /> Primesc raport lunar rezumat</label>
+      <br>
+      <label><input type="checkbox" name="sfaturi" value="1" /> Primesc sfaturi personalizate de economisire</label>
+
+    </fieldset>
+
+    <br>
+
+    <center>
+      <input type="submit" value="Creeaza cont gratuit" title="Inregistreaza-te si incepe sa planifici" />
+    </center>
+
+  </form>
+
+</div>
+
+<hr>
+
+</body>
+</html>
