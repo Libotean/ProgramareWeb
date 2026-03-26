@@ -17,47 +17,48 @@
 
     <hr>
 
-    <fieldset id="form-film">
-        <legend>Adaugare film nou</legend>
-        <br>
-        <label>Titlul filmului
-            <input type="text" name="titlu" maxlength="80" size="35" value="" placeholder="Interstellar">
-        </label>
-        <br><br>
-        <label>Anul aparitiei
-            <input type="number" name="an" min="1888" max="2026" step="1" value="2026">
-        </label>
-        <br><br>
-        <label>Genul filmului (selectie multipla)
+    <form id="form-film">
+        <fieldset>
+            <legend>Adaugare film nou</legend>
             <br>
-            <select name="gen" multiple>
-                <option value="actiune" selected>Actiune</option>
-                <option value="drama">Drama</option>                
-                <option value="sf">SF</option>
-                <option value="comedie">Comedie</option>
-                <option value="horror">Horror</option>
-            </select>
-        </label>
-        <br><br>
-        
-        <label><input type="checkbox" name="vizionat" value="1" checked> Vizionat</label><br>
-        <label><input type="checkbox" name="favorit" value="1"> Favorit</label><br>
-        <label><input type="checkbox" name="indisponibil" value="1" disabled> Indisponibil</label>
-        
-        <br><br>
-        <label>Format</label>
-        <input type="radio" name="format" value="dvd"> DVD
-        <input type="radio" name="format" value="bluray"> Blu-ray
-        
-        <br><br>
-        <label>Descriere scurta</label><br>
-        <textarea name="descriere" readonly cols="40" rows="4">Acest text este pre-completat si nu poate fi editat (readonly).</textarea>
-        
-        <br><br>
-        <input type="submit" value="Salveaza Filmul">
-        <input type="reset" value="Reseteaza Datele">
-    </fieldset>
-
+            <label>Titlul filmului
+                <input type="text" name="titlu" maxlength="80" size="35" value="" placeholder="Interstellar">
+            </label>
+            <br><br>
+            <label>Anul aparitiei
+                <input type="number" name="an" min="1888" max="2026" step="1" value="2026">
+            </label>
+            <br><br>
+            <label>Genul filmului (selectie multipla)
+                <br>
+                <select name="gen" multiple>
+                    <option value="actiune" selected>Actiune</option>
+                    <option value="drama">Drama</option>                
+                    <option value="sf">SF</option>
+                    <option value="comedie">Comedie</option>
+                    <option value="horror">Horror</option>
+                </select>
+            </label>
+            <br><br>
+            
+            <label><input type="checkbox" name="vizionat" value="1" checked> Vizionat</label><br>
+            <label><input type="checkbox" name="favorit" value="1"> Favorit</label><br>
+            <label><input type="checkbox" name="indisponibil" value="1" disabled> Indisponibil</label>
+            
+            <br><br>
+            <label>Format</label>
+            <input type="radio" name="format" value="dvd"> DVD
+            <input type="radio" name="format" value="bluray"> Blu-ray
+            
+            <br><br>
+            <label>Descriere scurta</label><br>
+            <textarea name="descriere" readonly cols="40" rows="4">Acest text este pre-completat si nu poate fi editat (readonly).</textarea>
+            
+            <br><br>
+            <input type="submit" value="Salveaza Filmul">
+            <input type="reset" value="Reseteaza Datele">
+        </fieldset>
+    </form>
     <br>
     <hr>
 
@@ -230,6 +231,68 @@
         const formular = document.getElementById("form-film");
         const tabel = document.getElementById("tabel-filme");
         const elementTotal = document.getElementById("total-filme");
+
+        formular.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const titlu = document.querySelector("input[name='titlu']").value.trim();
+            const an = parseInt(document.querySelector("input[name='an']").value);
+
+            const selectGen = document.querySelector("select[name='gen']");
+            const genuriSelectate = Array.from(selectGen.selectedOptions).map(opt => opt.value);
+
+            if (titlu === "") {
+                alert("Titlul nu poate fi gol!");
+                return;
+            }
+
+            if (an < 1900 || an > 2026) {
+                alert("Anul trebuie sa fie intre 1900 si 2026!");
+                return;
+            }
+
+            if (genuriSelectate.length === 0) {
+                alert("Selecteaza cel putin un gen!");
+                return;
+            }
+
+            const filmNou = {
+                titlu: titlu,
+                regizor: "Necunoscut",
+                an: an,
+                rating: 0.0,
+                gen: genuriSelectate.join(", "),
+                vizionat: document.querySelector("input[name='vizionat']").checked
+            };
+
+            filme.push(filmNou);
+
+            var tr = document.createElement("tr");
+
+            var td1 = document.createElement("td");
+            td1.innerText = filmNou.titlu;
+
+            var td2 = document.createElement("td");
+            td2.innerText = filmNou.regizor;
+
+            var td3 = document.createElement("td");
+            td3.innerText = filmNou.an;
+
+            var td4 = document.createElement("td");
+            td4.innerText = filmNou.rating;
+
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+            tr.appendChild(td4);
+
+            tabel.querySelector("tbody").insertBefore(tr, elementTotal.parentNode);
+
+            elementTotal.innerText = "Total filme in catalog: " + filme.length;
+ 
+            alert("Film adaugat cu succes!");
+            formular.reset();
+        });
 
 </script>
 </body>
