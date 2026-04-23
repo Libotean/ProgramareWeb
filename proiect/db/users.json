@@ -1,0 +1,12 @@
+[
+  {
+    "username": "user1",
+    "email": "user1@user.com",
+    "password": "$2b$10$EzKFImBHiWyAlqmbs3/gDuEhbO59UTvANOeQnOw219NSbt6kS5A5S"
+  },
+  {
+    "username": "user2",
+    "email": "user2@user.com",
+    "password": "$2b$10$JpVzg4k0.ij6Jt0ulWZVH.78KN2cAeZxGIc4bzMMfJbQ6lIgXXPmu"
+  }
+]

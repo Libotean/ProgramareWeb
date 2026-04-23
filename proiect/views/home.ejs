@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget Planner - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Bine ai venit la Budget Planner</h1>
+    <p>Gestioneaza-ti finantele inteligent.</p>
+    <% if (!user) { %>
+        <a href="/login"  class="btn btn-primary">Login</a> <a href="/register" class="btn btn-secondary">Inregistrare</a>
+    <% } else { %>
+        <a href="/budget" class="btn btn-success">Mergi la Dashboard</a> | <a href="/logout" class="btn btn-danger">Logout</a>
+    <% } %>
+</body>
+</html>
