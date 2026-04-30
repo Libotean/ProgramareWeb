@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Activitati</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h2>Date din MongoDB - Students</h2>
+    <table>
+        <tr>
+            <th>Saptamana</th>
+            <th>Proiect</th>
+            <th>Curs</th>
+        </tr>
+        <% studenti.forEach(item => { %>
+            <tr>
+                <td><%= item.week %></td>
+                <td><%= item.project %></td>
+                <td><%= item.course %></td>
+            </tr>
+        <% }) %>
+    </table>
+    <br>
+    <a href="/">Inapoi</a>
+</body>
+</html>
