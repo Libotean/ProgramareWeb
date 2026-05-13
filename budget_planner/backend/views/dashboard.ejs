@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - <%= user.username %></title>
+    <style>
+        .dark-mode { background-color: #333; color: white; }
+        .light-mode { background-color: #fff; color: black; }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</head>
+<body class="<%= theme %>-mode">
+
+    <h2>Salut, <%= user.username %>!</h2>
+    <p>Aceasta este vizita ta nr. <b><%= views %></b> in aceasta sesiune.</p>
+
+    <form action="/budget/set-theme" method="POST">
+        <label>Schimba tema:</label>
+        <select name="theme" onchange="this.form.submit()">
+            <option value="light" <%= theme === 'light' ? 'selected' : '' %>>Luminos</option>
+            <option value="dark" <%= theme === 'dark' ? 'selected' : '' %>>Intunecat</option>
+        </select>
+    </form>
+
+    <hr>
+
+    <h3>Situatie Bugetara</h3>
+    <table border="1" width="80%">
+        <thead>
+            <tr bgcolor="#a8a8a8">
+                <th>Categorie</th>
+                <th>Buget Alocat</th>
+                <th>Cheltuit</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% expenses.forEach(item => { %>
+                <tr>
+                    <td><b><%= item.categorie %></b></td>
+                    <td><%= item.alocat %> lei</td>
+                    <td><%= item.cheltuit %> lei</td>
+                    <td>
+                        <% if (item.cheltuit > item.alocat) { %>
+                            <span style="color: red;">Depasit!</span>
+                        <% } else if (item.cheltuit === item.alocat) { %>
+                            <span style="color: orange;">Limita atinsa</span>
+                        <% } else { %>
+                            <span style="color: green;">OK</span>
+                        <% } %>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <br>
+    <a href="/budget/detalii">Vezi detalii avansate</a>
+    <br>
+    <br>
+    <a href="/logout" class="btn btn-danger">Logout</a>
+
+</body>
+</html>
