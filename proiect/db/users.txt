@@ -1,3 +1,0 @@
-USERNAME    EMAIL               PAROLA
-user1       user1@user.com      user123
-user2       user2@user.com      user123

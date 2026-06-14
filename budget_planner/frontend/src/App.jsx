@@ -1,20 +1,31 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import api from './api'
 import Register from './pages/Register';
 import Login from './pages/Login';
 
-function Home({ user, status }) {
+function Home({ user, status, onLogout }) {
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h1>Budget Planner</h1>
       <p>Status: <strong>{status}</strong></p>
       {user ? (
-        <h2>Salut, {user.username}!</h2>
+        <div>
+          <p>Bine ai venit, {user.username}!</p>
+          <button 
+           onClick={onLogout}
+           style={{ backgroundColor: '#ff4d4d', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer' }}
+          >
+            Logout
+          </button>
+        </div>
       ) : (
         <div>
-          <p>Nu esti logat. Ai cont?<a href="/login">Logheaza-te aici!</a></p>
-          <p>Nu ai cont? <a href="/register">Inregistreaza-te!</a></p>
+          <p>Nu esti logat</p>
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+            <p>Ai cont? <Link to="/login">Autentifica-te!</Link></p>
+            <p>Nu ai cont? <Link to="/register">Inregisteaza-te!</Link></p>
+          </div>
         </div>
       )}
     </div>
@@ -29,6 +40,15 @@ function App() {
     setUser(userData);
   };
 
+  const handleLogout = async () => {
+    try {
+      await api.post('/api/auth/logout');
+      setUser(null);
+    } catch(err) {
+      console.error('LOGOUT ERROR:', err);
+    }
+  };
+
   useEffect(() => {
     api.get('/')
       .then(res => {
@@ -41,7 +61,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home user={user} status={status} />} />
+        <Route path="/" element={<Home user={user} status={status} onLogout={handleLogout} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
       </Routes>

@@ -49,10 +49,12 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/logout', (req, res) => {
-    req.session.destroy();
-    res.clearCookie('connect.sid');
-    res.json({ message: "Ai fost deconectat cu succes!" });
+router.post('/logout', (req, res) => { 
+    req.session.destroy((err) => {
+        if (err) return res.status(500).json({ error: "Eroare la logout" });
+        res.clearCookie('connect.sid');
+        res.json({ message: "Logout reusit!" });
+    });
 });
 
 module.exports = router;
