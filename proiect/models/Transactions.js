@@ -5,6 +5,8 @@ const transactionSchema = new mongoose.Schema({
     budgetId: { type: mongoose.Schema.Types.ObjectId, ref: 'Budget', required: true },
     descriere: { type: String, required: true },
     suma: { type: Number, required: true },
+    luna: { type: Number, required: true },
+    an: { type: Number, required: true },
     data: { type: Date, default: Date.now }
 });
 

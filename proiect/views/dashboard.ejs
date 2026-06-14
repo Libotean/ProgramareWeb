@@ -8,20 +8,38 @@
     <style>
         * { box-sizing: border-box; }
         body { background: #f8f8f6; font-family: 'Segoe UI', sans-serif; color: #1a1a1a; }
+        body.dark { background: #141414; color: #e8e8e4; }
 
         .topbar { background: #fff; border-bottom: 1px solid #e8e8e4; padding: 14px 2rem; display: flex; justify-content: space-between; align-items: center; }
+        body.dark .topbar { background: #1e1e1e; border-color: #2e2e2e; }
         .topbar-brand { font-size: 1rem; font-weight: 600; letter-spacing: -0.3px; color: #1a1a1a; }
+        body.dark .topbar-brand { color: #e8e8e4; }
         .topbar-brand span { color: #e07b2a; }
         .topbar-right { display: flex; align-items: center; gap: 12px; font-size: 0.83rem; color: #6b6b6b; }
         .topbar-right a { color: #1a1a1a; text-decoration: none; font-size: 0.83rem; border: 1px solid #e0e0dc; border-radius: 7px; padding: 5px 14px; }
+        body.dark .topbar-right a { color: #e8e8e4; border-color: #3a3a3a; }
         .topbar-right a:hover { background: #f0f0ec; }
+        body.dark .topbar-right a:hover { background: #2a2a2a; }
 
         .main { max-width: 860px; margin: 0 auto; padding: 2rem 1rem; }
 
+        .month-nav { display: flex; align-items: center; gap: 12px; margin-bottom: 2rem; }
+        .month-nav a { color: #6b6b6b; text-decoration: none; font-size: 1.1rem; padding: 4px 8px; border-radius: 6px; border: 1px solid #e0e0dc; }
+        body.dark .month-nav a { border-color: #3a3a3a; color: #9b9b9b; }
+        .month-nav a:hover { border-color: #e07b2a; color: #e07b2a; }
+        .month-nav h2 { font-size: 1.1rem; font-weight: 500; margin: 0; min-width: 160px; text-align: center; }
+
+        .alert-recurente { background: #fff8f2; border: 1px solid #f0d0a0; border-radius: 10px; padding: 0.85rem 1.25rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.87rem; color: #7a4a10; }
+        body.dark .alert-recurente { background: #2a1e10; border-color: #5a3a10; color: #e0a060; }
+        .btn-aplica { background: #e07b2a; color: #fff; border: none; border-radius: 7px; padding: 6px 16px; font-size: 0.83rem; cursor: pointer; }
+        .btn-aplica:hover { background: #c96d20; }
+
         .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 2rem; }
         .metric { background: #fff; border: 1px solid #e8e8e4; border-radius: 10px; padding: 1.1rem 1.25rem; }
+        body.dark .metric { background: #1e1e1e; border-color: #2e2e2e; }
         .metric label { font-size: 0.75rem; color: #6b6b6b; display: block; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
         .metric .val { font-size: 1.5rem; font-weight: 500; color: #1a1a1a; }
+        body.dark .metric .val { color: #e8e8e4; }
         .metric .val.ok { color: #2a7a4b; }
         .metric .val.danger { color: #c0392b; }
         .metric .val.accent { color: #e07b2a; }
@@ -29,64 +47,110 @@
         .section-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #6b6b6b; margin-bottom: 0.75rem; }
 
         .add-card { background: #fff; border: 1px solid #e8e8e4; border-radius: 10px; padding: 1.25rem; margin-bottom: 2rem; }
+        body.dark .add-card { background: #1e1e1e; border-color: #2e2e2e; }
         .add-card input, .add-card select { border: 1px solid #e0e0dc; border-radius: 8px; font-size: 0.87rem; padding: 8px 12px; background: #fafaf8; color: #1a1a1a; width: 100%; }
+        body.dark .add-card input, body.dark .add-card select { background: #2a2a2a; border-color: #3a3a3a; color: #e8e8e4; }
         .add-card input:focus, .add-card select:focus { border-color: #e07b2a; outline: none; box-shadow: 0 0 0 3px rgba(224,123,42,0.1); }
+        .recurent-row { display: flex; align-items: center; gap: 8px; font-size: 0.83rem; color: #6b6b6b; margin-top: 8px; }
+        .recurent-row input[type=checkbox] { accent-color: #e07b2a; width: 15px; height: 15px; }
         .btn-add { background: #e07b2a; color: #fff; border: none; border-radius: 8px; padding: 8px 20px; font-size: 0.87rem; cursor: pointer; white-space: nowrap; }
         .btn-add:hover { background: #c96d20; }
 
         .budget-block { background: #fff; border: 1px solid #e8e8e4; border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+        body.dark .budget-block { background: #1e1e1e; border-color: #2e2e2e; }
         .budget-header { padding: 1rem 1.25rem; display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 16px; }
         .budget-name { font-size: 0.95rem; font-weight: 500; }
+        .budget-badges { display: flex; gap: 6px; align-items: center; }
         .budget-tip { font-size: 0.72rem; color: #6b6b6b; border: 1px solid #e0e0dc; border-radius: 20px; padding: 2px 10px; }
+        body.dark .budget-tip { border-color: #3a3a3a; }
+        .budget-recurent { font-size: 0.72rem; color: #e07b2a; border: 1px solid #f0c080; border-radius: 20px; padding: 2px 10px; }
+        body.dark .budget-recurent { border-color: #5a3a10; }
         .budget-nums { font-size: 0.83rem; color: #6b6b6b; }
         .budget-nums strong { color: #1a1a1a; }
+        body.dark .budget-nums strong { color: #e8e8e4; }
         .progress-wrap { height: 4px; background: #f0f0ec; margin: 0 1.25rem; border-radius: 99px; overflow: hidden; }
+        body.dark .progress-wrap { background: #2a2a2a; }
         .progress-bar { height: 100%; border-radius: 99px; background: #e07b2a; transition: width 0.3s; }
         .progress-bar.ok { background: #2a7a4b; }
         .progress-bar.danger { background: #c0392b; }
 
         .transactions { padding: 0.75rem 1.25rem 1rem; border-top: 1px solid #f0f0ec; margin-top: 0.75rem; }
+        body.dark .transactions { border-color: #2e2e2e; }
         .tx-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f5f5f2; font-size: 0.85rem; }
-        .tx-row:last-child { border-bottom: none; }
+        body.dark .tx-row { border-color: #2a2a2a; }
         .tx-desc { color: #1a1a1a; }
+        body.dark .tx-desc { color: #e8e8e4; }
         .tx-date { font-size: 0.75rem; color: #9b9b9b; margin-left: 8px; }
         .tx-suma { font-weight: 500; color: #e07b2a; }
         .btn-del { background: none; border: none; color: #ccc; cursor: pointer; font-size: 0.85rem; padding: 2px 6px; border-radius: 5px; }
         .btn-del:hover { color: #c0392b; background: #fff5f5; }
+        body.dark .btn-del:hover { background: #2a1a1a; }
 
         .tx-add-form { display: flex; gap: 8px; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #f0f0ec; }
-        .tx-add-form input { flex: 1; border: 1px solid #e0e0dc; border-radius: 7px; font-size: 0.83rem; padding: 6px 10px; background: #fafaf8; }
+        body.dark .tx-add-form { border-color: #2e2e2e; }
+        .tx-add-form input { flex: 1; border: 1px solid #e0e0dc; border-radius: 7px; font-size: 0.83rem; padding: 6px 10px; background: #fafaf8; color: #1a1a1a; }
+        body.dark .tx-add-form input { background: #2a2a2a; border-color: #3a3a3a; color: #e8e8e4; }
         .tx-add-form input:focus { border-color: #e07b2a; outline: none; }
         .btn-tx-add { background: #1a1a1a; color: #fff; border: none; border-radius: 7px; padding: 6px 14px; font-size: 0.83rem; cursor: pointer; }
+        body.dark .btn-tx-add { background: #e07b2a; }
         .btn-tx-add:hover { background: #333; }
+        body.dark .btn-tx-add:hover { background: #c96d20; }
 
-        .budget-actions { display: flex; gap-6px; align-items: center; gap: 6px; }
+        .budget-actions { display: flex; align-items: center; gap: 6px; }
         .btn-edit-toggle { background: none; border: 1px solid #e0e0dc; border-radius: 7px; font-size: 0.78rem; color: #6b6b6b; padding: 4px 10px; cursor: pointer; }
+        body.dark .btn-edit-toggle { border-color: #3a3a3a; color: #9b9b9b; }
         .btn-edit-toggle:hover { border-color: #e07b2a; color: #e07b2a; }
         .edit-form { display: none; gap: 8px; margin: 0.5rem 1.25rem 0.75rem; align-items: center; }
         .edit-form.open { display: flex; }
-        .edit-form input { border: 1px solid #e0e0dc; border-radius: 7px; font-size: 0.83rem; padding: 6px 10px; background: #fafaf8; width: 140px; }
+        .edit-form input { border: 1px solid #e0e0dc; border-radius: 7px; font-size: 0.83rem; padding: 6px 10px; background: #fafaf8; width: 140px; color: #1a1a1a; }
+        body.dark .edit-form input { background: #2a2a2a; border-color: #3a3a3a; color: #e8e8e4; }
         .edit-form input:focus { border-color: #e07b2a; outline: none; }
         .btn-save { background: #e07b2a; color: #fff; border: none; border-radius: 7px; padding: 6px 14px; font-size: 0.83rem; cursor: pointer; }
 
         .empty-state { text-align: center; padding: 3rem 1rem; color: #9b9b9b; font-size: 0.9rem; }
 
-        .theme-row { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e8e8e4; display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: #9b9b9b; }
-        .theme-row select { font-size: 0.8rem; border: 1px solid #e0e0dc; border-radius: 6px; padding: 4px 8px; background: #fafaf8; color: #1a1a1a; }
+        .bottom-bar { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e8e8e4; display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: #9b9b9b; }
+        body.dark .bottom-bar { border-color: #2e2e2e; }
+        .bottom-bar select { font-size: 0.8rem; border: 1px solid #e0e0dc; border-radius: 6px; padding: 4px 8px; background: #fafaf8; color: #1a1a1a; }
+        body.dark .bottom-bar select { background: #2a2a2a; border-color: #3a3a3a; color: #e8e8e4; }
         .views-badge { margin-left: auto; font-size: 0.75rem; color: #bbb; }
     </style>
 </head>
-<body>
+<body class="<%= theme === 'dark' ? 'dark' : '' %>">
 
 <div class="topbar">
     <div class="topbar-brand">budget<span>.</span></div>
     <div class="topbar-right">
+        <a href="/budget/rapoarte">Rapoarte</a>
         <span>Bun venit, <strong><%= user.username %></strong></span>
         <a href="/logout">Delogare</a>
     </div>
 </div>
 
 <div class="main">
+
+    <!-- Navigare luna -->
+    <%
+        const prevLuna = luna === 1 ? 12 : luna - 1;
+        const prevAn = luna === 1 ? an - 1 : an;
+        const nextLuna = luna === 12 ? 1 : luna + 1;
+        const nextAn = luna === 12 ? an + 1 : an;
+    %>
+    <div class="month-nav">
+        <a href="/budget?luna=<%= prevLuna %>&an=<%= prevAn %>">&#8592;</a>
+        <h2><%= lunaText %> <%= an %></h2>
+        <a href="/budget?luna=<%= nextLuna %>&an=<%= nextAn %>">&#8594;</a>
+    </div>
+
+    <!-- Alert recurente -->
+    <% if (areRecurenteNeaplicate) { %>
+        <div class="alert-recurente">
+            <span>Ai cheltuieli recurente care nu au fost aplicate pentru luna aceasta.</span>
+            <form method="POST" action="/budget/aplica-recurente" style="display:inline;">
+                <button type="submit" class="btn-aplica">Aplică template</button>
+            </form>
+        </div>
+    <% } %>
 
     <!-- Metrici -->
     <div class="metrics">
@@ -107,9 +171,9 @@
     <!-- Adaugă categorie -->
     <p class="section-label">Categorie nouă</p>
     <div class="add-card">
-        <form method="POST" action="/budget/add-budget">
+        <form method="POST" action="/budget/add-budget?luna=<%= luna %>&an=<%= an %>">
             <div class="row g-2 align-items-end">
-                <div class="col-5">
+                <div class="col-4">
                     <label style="font-size:0.78rem;color:#6b6b6b;display:block;margin-bottom:4px;">Categorie</label>
                     <input type="text" name="categorie" placeholder="ex: Mâncare, Gaz..." required>
                 </div>
@@ -124,8 +188,12 @@
                         <option value="fix">Fix</option>
                     </select>
                 </div>
-                <div class="col-2">
-                    <button type="submit" class="btn-add w-100">+ Adaugă</button>
+                <div class="col-3 d-flex flex-column gap-1">
+                    <div class="recurent-row">
+                        <input type="checkbox" name="recurent" id="recurent">
+                        <label for="recurent" style="margin:0;cursor:pointer;">Recurentă lunar</label>
+                    </div>
+                    <button type="submit" class="btn-add">+ Adaugă</button>
                 </div>
             </div>
         </form>
@@ -135,7 +203,7 @@
     <p class="section-label">Cheltuielile tale</p>
 
     <% if (budgets.length === 0) { %>
-        <div class="empty-state">Nicio categorie încă. Adaugă una mai sus.</div>
+        <div class="empty-state">Nicio categorie pentru <%= lunaText %> <%= an %>. Adaugă una mai sus.</div>
     <% } %>
 
     <% budgets.forEach(b => { %>
@@ -148,7 +216,10 @@
             <div class="budget-header">
                 <div>
                     <span class="budget-name"><%= b.categorie %></span>
-                    <span class="budget-tip ms-2"><%= b.tip %></span>
+                    <div class="budget-badges d-inline-flex ms-2">
+                        <span class="budget-tip"><%= b.tip %></span>
+                        <% if (b.recurent) { %><span class="budget-recurent">recurent</span><% } %>
+                    </div>
                 </div>
                 <div class="budget-nums">
                     <strong><%= b.cheltuit.toFixed(2) %></strong> / <%= b.alocat.toFixed(2) %> lei
@@ -156,6 +227,8 @@
                 <div class="budget-actions">
                     <button class="btn-edit-toggle" onclick="toggleEdit('<%= b._id %>')">Editează</button>
                     <form method="POST" action="/budget/delete-budget/<%= b._id %>" style="display:inline;" onsubmit="return confirm('Ștergi categoria și toate tranzacțiile ei?')">
+                        <input type="hidden" name="luna" value="<%= luna %>">
+                        <input type="hidden" name="an" value="<%= an %>">
                         <button type="submit" class="btn-del">✕</button>
                     </form>
                 </div>
@@ -165,6 +238,8 @@
             <div class="edit-form" id="edit-<%= b._id %>">
                 <form method="POST" action="/budget/edit-budget/<%= b._id %>" style="display:flex;gap:8px;align-items:center;">
                     <input type="number" name="alocat" value="<%= b.alocat %>" min="0" step="0.01" required>
+                    <input type="hidden" name="luna" value="<%= luna %>">
+                    <input type="hidden" name="an" value="<%= an %>">
                     <button type="submit" class="btn-save">Salvează</button>
                 </form>
             </div>
@@ -188,32 +263,36 @@
                         <div style="display:flex;align-items:center;gap:10px;">
                             <span class="tx-suma"><%= t.suma.toFixed(2) %> lei</span>
                             <form method="POST" action="/budget/delete-transaction/<%= t._id %>" style="display:inline;">
+                                <input type="hidden" name="luna" value="<%= luna %>">
+                                <input type="hidden" name="an" value="<%= an %>">
                                 <button type="submit" class="btn-del">✕</button>
                             </form>
                         </div>
                     </div>
                 <% }) %>
 
-                <!-- Adaugă tranzacție -->
                 <form method="POST" action="/budget/add-transaction/<%= b._id %>" class="tx-add-form">
                     <input type="text" name="descriere" placeholder="Descriere (ex: Lidl)" required>
                     <input type="number" name="suma" placeholder="Lei" min="0" step="0.01" required style="max-width:100px;">
+                    <input type="hidden" name="luna" value="<%= luna %>">
+                    <input type="hidden" name="an" value="<%= an %>">
                     <button type="submit" class="btn-tx-add">+ Adaugă</button>
                 </form>
             </div>
         </div>
     <% }) %>
 
-    <!-- Tema + vizite -->
-    <div class="theme-row">
+    <!-- Bottom bar -->
+    <div class="bottom-bar">
         <form method="POST" action="/budget/set-theme" style="display:flex;align-items:center;gap:8px;">
             <span>Temă:</span>
             <select name="theme" onchange="this.form.submit()">
                 <option value="light" <%= theme === 'light' ? 'selected' : '' %>>Light</option>
                 <option value="dark" <%= theme === 'dark' ? 'selected' : '' %>>Dark</option>
             </select>
+            <input type="hidden" name="luna" value="<%= luna %>">
+            <input type="hidden" name="an" value="<%= an %>">
         </form>
-        <span class="views-badge">Vizite sesiune: <%= views %></span>
     </div>
 
 </div>

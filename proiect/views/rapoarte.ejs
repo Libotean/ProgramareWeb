@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapoarte</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body { background: #f8f8f6; font-family: 'Segoe UI', sans-serif; color: #1a1a1a; }
+        body.dark { background: #141414; color: #e8e8e4; }
+
+        .topbar { background: #fff; border-bottom: 1px solid #e8e8e4; padding: 14px 2rem; display: flex; justify-content: space-between; align-items: center; }
+        body.dark .topbar { background: #1e1e1e; border-color: #2e2e2e; }
+        .topbar-brand { font-size: 1rem; font-weight: 600; letter-spacing: -0.3px; color: #1a1a1a; }
+        body.dark .topbar-brand { color: #e8e8e4; }
+        .topbar-brand span { color: #e07b2a; }
+        .topbar-right { display: flex; align-items: center; gap: 12px; font-size: 0.83rem; }
+        .topbar-right a { color: #1a1a1a; text-decoration: none; border: 1px solid #e0e0dc; border-radius: 7px; padding: 5px 14px; }
+        body.dark .topbar-right a { color: #e8e8e4; border-color: #3a3a3a; }
+        .topbar-right a:hover { background: #f0f0ec; }
+        body.dark .topbar-right a:hover { background: #2a2a2a; }
+
+        .main { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .page-title { font-size: 1.1rem; font-weight: 500; margin-bottom: 2rem; }
+
+        .global-card { background: #fff; border: 1px solid #e8e8e4; border-radius: 10px; padding: 1.5rem; margin-bottom: 2rem; }
+        body.dark .global-card { background: #1e1e1e; border-color: #2e2e2e; }
+        .global-card h3 { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #6b6b6b; margin-bottom: 1.25rem; }
+        .global-chart-wrap { max-width: 320px; margin: 0 auto; }
+
+        .raport-block { background: #fff; border: 1px solid #e8e8e4; border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+        body.dark .raport-block { background: #1e1e1e; border-color: #2e2e2e; }
+
+        .raport-header { padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+        .raport-header:hover { background: #fafaf8; }
+        body.dark .raport-header:hover { background: #242424; }
+        .raport-luna { font-size: 0.95rem; font-weight: 500; }
+        .raport-summary { display: flex; gap: 20px; font-size: 0.83rem; color: #6b6b6b; align-items: center; }
+        .raport-summary .ok { color: #2a7a4b; font-weight: 500; }
+        .raport-summary .danger { color: #c0392b; font-weight: 500; }
+        .raport-summary .accent { color: #e07b2a; font-weight: 500; }
+        .chevron { font-size: 0.75rem; color: #9b9b9b; transition: transform 0.2s; display: inline-block; }
+        .chevron.open { transform: rotate(180deg); }
+
+        .raport-body { display: none; border-top: 1px solid #f0f0ec; }
+        body.dark .raport-body { border-color: #2e2e2e; }
+        .raport-body.open { display: block; }
+
+        .raport-inner { display: grid; grid-template-columns: 1fr 220px; gap: 1.5rem; padding: 1.25rem; align-items: start; }
+
+        .cat-row { padding: 10px 0; border-bottom: 1px solid #f5f5f2; }
+        body.dark .cat-row { border-color: #2a2a2a; }
+        .cat-row:last-child { border-bottom: none; }
+        .cat-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .cat-name { font-size: 0.87rem; font-weight: 500; }
+        .cat-nums { font-size: 0.8rem; color: #6b6b6b; }
+        .cat-nums strong { color: #1a1a1a; }
+        body.dark .cat-nums strong { color: #e8e8e4; }
+        .progress-wrap { height: 4px; background: #f0f0ec; border-radius: 99px; overflow: hidden; }
+        body.dark .progress-wrap { background: #2a2a2a; }
+        .progress-bar { height: 100%; border-radius: 99px; background: #e07b2a; }
+        .progress-bar.ok { background: #2a7a4b; }
+        .progress-bar.danger { background: #c0392b; }
+
+        .chart-side { position: sticky; top: 1rem; }
+        .chart-side canvas { max-width: 100%; }
+
+        .empty-state { text-align: center; padding: 4rem 1rem; color: #9b9b9b; font-size: 0.9rem; }
+    </style>
+</head>
+<body class="<%= theme === 'dark' ? 'dark' : '' %>">
+
+<div class="topbar">
+    <div class="topbar-brand">budget<span>.</span></div>
+    <div class="topbar-right">
+        <a href="/budget">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<div class="main">
+    <p class="page-title">Rapoarte lunare</p>
+
+    <% if (rapoarte.length === 0) { %>
+        <div class="empty-state">Niciun raport disponibil inca.</div>
+    <% } else { %>
+
+    <!-- Chart global -->
+    <div class="global-card">
+        <h3>Toate cheltuielile per categorie</h3>
+        <div class="global-chart-wrap">
+            <canvas id="chartGlobal"></canvas>
+        </div>
+    </div>
+
+    <!-- Rapoarte per luna -->
+    <% rapoarte.forEach((r, i) => { %>
+        <%
+            const surplus = r.totalAlocat - r.totalCheltuit;
+            const depasit = r.totalCheltuit > r.totalAlocat;
+        %>
+        <div class="raport-block">
+            <div class="raport-header" onclick="toggleRaport(<%= i %>)">
+                <span class="raport-luna"><%= r.lunaText %> <%= r.an %></span>
+                <div class="raport-summary">
+                    <span>Alocat: <span class="accent"><%= r.totalAlocat.toFixed(2) %> lei</span></span>
+                    <span>Cheltuit: <span class="<%= depasit ? 'danger' : '' %>"><%= r.totalCheltuit.toFixed(2) %> lei</span></span>
+                    <span class="<%= depasit ? 'danger' : 'ok' %>"><%= depasit ? '-' : '+' %><%= Math.abs(surplus).toFixed(2) %> lei</span>
+                    <span class="chevron" id="chevron-<%= i %>">&#9660;</span>
+                </div>
+            </div>
+
+            <div class="raport-body" id="raport-<%= i %>">
+                <div class="raport-inner">
+                    <div class="cat-list">
+                        <% r.categorii.forEach(c => { %>
+                            <%
+                                const pct = c.alocat > 0 ? Math.min((c.cheltuit / c.alocat) * 100, 100) : 0;
+                                const over = c.cheltuit > c.alocat;
+                                const barClass = over ? 'danger' : (pct > 75 ? '' : 'ok');
+                            %>
+                            <div class="cat-row">
+                                <div class="cat-top">
+                                    <span class="cat-name"><%= c.categorie %></span>
+                                    <span class="cat-nums">
+                                        <strong><%= c.cheltuit.toFixed(2) %></strong> / <%= c.alocat.toFixed(2) %> lei
+                                    </span>
+                                </div>
+                                <div class="progress-wrap">
+                                    <div class="progress-bar <%= barClass %>" style="width:<%= pct %>%"></div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                    <div class="chart-side">
+                        <canvas id="chart-<%= i %>"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+
+    <% } %>
+</div>
+
+<script>
+    const isDark = document.body.classList.contains('dark');
+    const textColor = isDark ? '#9b9b9b' : '#6b6b6b';
+
+    const CULORI = [
+        '#e07b2a', '#2a7a4b', '#3a7fc1', '#c0392b',
+        '#8e44ad', '#16a085', '#d4ac0d', '#e74c3c',
+        '#1abc9c', '#2980b9', '#f39c12', '#27ae60'
+    ];
+
+    <% if (rapoarte.length > 0) { %>
+
+    // Chart global — agregate toate lunile per categorie
+    const globalMap = {};
+    <% rapoarte.forEach(r => { %>
+        <% r.categorii.forEach(c => { %>
+            if (!globalMap['<%= c.categorie %>']) globalMap['<%= c.categorie %>'] = 0;
+            globalMap['<%= c.categorie %>'] += <%= c.cheltuit %>;
+        <% }) %>
+    <% }) %>
+
+    const globalLabels = Object.keys(globalMap);
+    const globalData = Object.values(globalMap);
+
+    new Chart(document.getElementById('chartGlobal'), {
+        type: 'pie',
+        data: {
+            labels: globalLabels,
+            datasets: [{
+                data: globalData,
+                backgroundColor: CULORI.slice(0, globalLabels.length),
+                borderWidth: 2,
+                borderColor: isDark ? '#1e1e1e' : '#fff'
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: textColor,
+                        font: { size: 12, family: 'Segoe UI' },
+                        padding: 14,
+                        boxWidth: 12
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.label}: ${ctx.parsed.toFixed(2)} lei`
+                    }
+                }
+            }
+        }
+    });
+
+    // Charturi per luna
+    <% rapoarte.forEach((r, i) => { %>
+    new Chart(document.getElementById('chart-<%= i %>'), {
+        type: 'pie',
+        data: {
+            labels: [<% r.categorii.forEach((c, ci) => { %>'<%= c.categorie %>'<% if (ci < r.categorii.length - 1) { %>,<% } %><% }) %>],
+            datasets: [{
+                data: [<% r.categorii.forEach((c, ci) => { %><%= c.cheltuit %><% if (ci < r.categorii.length - 1) { %>,<% } %><% }) %>],
+                backgroundColor: CULORI.slice(0, <%= r.categorii.length %>),
+                borderWidth: 2,
+                borderColor: isDark ? '#1e1e1e' : '#fff'
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.label}: ${ctx.parsed.toFixed(2)} lei`
+                    }
+                }
+            }
+        }
+    });
+    <% }) %>
+
+    <% } %>
+
+    function toggleRaport(i) {
+        const body = document.getElementById('raport-' + i);
+        const chevron = document.getElementById('chevron-' + i);
+        body.classList.toggle('open');
+        chevron.classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>
