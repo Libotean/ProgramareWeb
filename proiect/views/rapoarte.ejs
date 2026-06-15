@@ -6,69 +6,7 @@
     <title>Rapoarte</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        * { box-sizing: border-box; }
-        body { background: #f8f8f6; font-family: 'Segoe UI', sans-serif; color: #1a1a1a; }
-        body.dark { background: #141414; color: #e8e8e4; }
-
-        .topbar { background: #fff; border-bottom: 1px solid #e8e8e4; padding: 14px 2rem; display: flex; justify-content: space-between; align-items: center; }
-        body.dark .topbar { background: #1e1e1e; border-color: #2e2e2e; }
-        .topbar-brand { font-size: 1rem; font-weight: 600; letter-spacing: -0.3px; color: #1a1a1a; }
-        body.dark .topbar-brand { color: #e8e8e4; }
-        .topbar-brand span { color: #e07b2a; }
-        .topbar-right { display: flex; align-items: center; gap: 12px; font-size: 0.83rem; }
-        .topbar-right a { color: #1a1a1a; text-decoration: none; border: 1px solid #e0e0dc; border-radius: 7px; padding: 5px 14px; }
-        body.dark .topbar-right a { color: #e8e8e4; border-color: #3a3a3a; }
-        .topbar-right a:hover { background: #f0f0ec; }
-        body.dark .topbar-right a:hover { background: #2a2a2a; }
-
-        .main { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
-        .page-title { font-size: 1.1rem; font-weight: 500; margin-bottom: 2rem; }
-
-        .global-card { background: #fff; border: 1px solid #e8e8e4; border-radius: 10px; padding: 1.5rem; margin-bottom: 2rem; }
-        body.dark .global-card { background: #1e1e1e; border-color: #2e2e2e; }
-        .global-card h3 { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #6b6b6b; margin-bottom: 1.25rem; }
-        .global-chart-wrap { max-width: 320px; margin: 0 auto; }
-
-        .raport-block { background: #fff; border: 1px solid #e8e8e4; border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
-        body.dark .raport-block { background: #1e1e1e; border-color: #2e2e2e; }
-
-        .raport-header { padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
-        .raport-header:hover { background: #fafaf8; }
-        body.dark .raport-header:hover { background: #242424; }
-        .raport-luna { font-size: 0.95rem; font-weight: 500; }
-        .raport-summary { display: flex; gap: 20px; font-size: 0.83rem; color: #6b6b6b; align-items: center; }
-        .raport-summary .ok { color: #2a7a4b; font-weight: 500; }
-        .raport-summary .danger { color: #c0392b; font-weight: 500; }
-        .raport-summary .accent { color: #e07b2a; font-weight: 500; }
-        .chevron { font-size: 0.75rem; color: #9b9b9b; transition: transform 0.2s; display: inline-block; }
-        .chevron.open { transform: rotate(180deg); }
-
-        .raport-body { display: none; border-top: 1px solid #f0f0ec; }
-        body.dark .raport-body { border-color: #2e2e2e; }
-        .raport-body.open { display: block; }
-
-        .raport-inner { display: grid; grid-template-columns: 1fr 220px; gap: 1.5rem; padding: 1.25rem; align-items: start; }
-
-        .cat-row { padding: 10px 0; border-bottom: 1px solid #f5f5f2; }
-        body.dark .cat-row { border-color: #2a2a2a; }
-        .cat-row:last-child { border-bottom: none; }
-        .cat-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-        .cat-name { font-size: 0.87rem; font-weight: 500; }
-        .cat-nums { font-size: 0.8rem; color: #6b6b6b; }
-        .cat-nums strong { color: #1a1a1a; }
-        body.dark .cat-nums strong { color: #e8e8e4; }
-        .progress-wrap { height: 4px; background: #f0f0ec; border-radius: 99px; overflow: hidden; }
-        body.dark .progress-wrap { background: #2a2a2a; }
-        .progress-bar { height: 100%; border-radius: 99px; background: #e07b2a; }
-        .progress-bar.ok { background: #2a7a4b; }
-        .progress-bar.danger { background: #c0392b; }
-
-        .chart-side { position: sticky; top: 1rem; }
-        .chart-side canvas { max-width: 100%; }
-
-        .empty-state { text-align: center; padding: 4rem 1rem; color: #9b9b9b; font-size: 0.9rem; }
-    </style>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body class="<%= theme === 'dark' ? 'dark' : '' %>">
 
