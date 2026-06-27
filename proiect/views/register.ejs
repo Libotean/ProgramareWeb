@@ -3,33 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inregistrare</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Inregistrare · Budget</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
 </head>
 <body class="center-page">
-    <div class="form-card">
-        <h2>Cont nou</h2>
+    <main class="form-card">
+        <a href="/" class="brand">budget<span>.</span></a>
+        <h2>Creeaza-ti contul</h2>
         <p class="subtitle">Completeaza datele pentru a incepe.</p>
+
         <% if (error) { %>
-            <div class="error-msg"><%= error %></div>
+            <div class="error-msg" role="alert"><%= error %></div>
         <% } %>
-        <form method="POST" action="/register">
-            <div class="mb-3">
-                <label>Nume utilizator</label>
-                <input type="text" name="username" class="form-control" placeholder="John Doe" required>
+
+        <form method="POST" action="/register" novalidate>
+            <div class="form-group">
+                <label for="username">Nume utilizator</label>
+                <input id="username" type="text" name="username" class="form-control" placeholder="John Doe" autocomplete="name" required>
             </div>
-            <div class="mb-3">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" placeholder="email@exemplu.com" required>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" class="form-control" placeholder="email@exemplu.com" autocomplete="email" required>
             </div>
-            <div class="mb-3">
-                <label>Parola</label>
-                <input type="password" name="password" class="form-control" placeholder="minim 6 caractere" required>
+            <div class="form-group">
+                <label for="password">Parola</label>
+                <input id="password" type="password" name="password" class="form-control" placeholder="minim 6 caractere" autocomplete="new-password" minlength="6" required>
             </div>
             <button type="submit" class="btn-submit">Creeaza cont</button>
         </form>
-        <div class="bottom-link">Ai deja cont? <a href="/login">Autentifica-te</a></div>
-    </div>
+
+        <p class="bottom-link">Ai deja cont? <a href="/login">Autentifica-te</a></p>
+    </main>
 </body>
 </html>

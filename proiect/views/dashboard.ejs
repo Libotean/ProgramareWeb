@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Dashboard · Budget</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
 </head>
 <body class="<%= theme === 'dark' ? 'dark' : '' %>">
 
-<div class="topbar">
-    <div class="topbar-brand">budget<span>.</span></div>
-    <div class="topbar-right">
+<header class="topbar">
+    <a href="/" class="topbar-brand">budget<span>.</span></a>
+    <button class="nav-toggle" type="button" aria-label="Meniu" aria-expanded="false" onclick="toggleNav(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+    <nav class="topbar-right" id="topbarNav">
+        <span class="topbar-greeting">Bun venit, <strong><%= user.username %></strong></span>
         <a href="/budget/rapoarte">Rapoarte</a>
-        <span>Bun venit, <strong><%= user.username %></strong></span>
         <a href="/logout">Logout</a>
-    </div>
-</div>
+    </nav>
+</header>
 
 <div class="main">
 
@@ -27,24 +32,24 @@
         const nextLuna = luna === 12 ? 1 : luna + 1;
         const nextAn = luna === 12 ? an + 1 : an;
     %>
-    <div class="month-nav">
-        <a href="/budget?luna=<%= prevLuna %>&an=<%= prevAn %>">&#8592;</a>
+    <nav class="month-nav" aria-label="Navigare luna">
+        <a href="/budget?luna=<%= prevLuna %>&an=<%= prevAn %>" aria-label="Luna anterioara">&#8592;</a>
         <h2><%= lunaText %> <%= an %></h2>
-        <a href="/budget?luna=<%= nextLuna %>&an=<%= nextAn %>">&#8594;</a>
-    </div>
+        <a href="/budget?luna=<%= nextLuna %>&an=<%= nextAn %>" aria-label="Luna urmatoare">&#8594;</a>
+    </nav>
 
     <!-- Alert recurente -->
     <% if (areRecurenteNeaplicate) { %>
-        <div class="alert-recurente">
+        <div class="alert-recurente" role="status">
             <span>Ai cheltuieli recurente care nu au fost aplicate pentru luna aceasta.</span>
-            <form method="POST" action="/budget/aplica-recurente" style="display:inline;">
+            <form method="POST" action="/budget/aplica-recurente" style="margin:0;">
                 <button type="submit" class="btn-aplica">Aplica template</button>
             </form>
         </div>
     <% } %>
 
     <!-- Metrici -->
-    <div class="metrics">
+    <section class="metrics" aria-label="Sumar luna">
         <div class="metric">
             <label>Total alocat</label>
             <div class="val accent"><%= totalAlocat.toFixed(2) %> lei</div>
@@ -54,37 +59,37 @@
             <div class="val <%= totalCheltuit > totalAlocat ? 'danger' : '' %>"><%= totalCheltuit.toFixed(2) %> lei</div>
         </div>
         <div class="metric">
-            <label>Rămas</label>
+            <label>Ramas</label>
             <div class="val <%= ramas < 0 ? 'danger' : 'ok' %>"><%= ramas.toFixed(2) %> lei</div>
         </div>
-    </div>
+    </section>
 
     <!-- Adauga categorie -->
     <p class="section-label">Categorie noua</p>
     <div class="add-card">
         <form method="POST" action="/budget/add-budget?luna=<%= luna %>&an=<%= an %>">
-            <div class="row g-2 align-items-end">
-                <div class="col-4">
-                    <label style="font-size:0.78rem;color:#6b6b6b;display:block;margin-bottom:4px;">Categorie</label>
-                    <input type="text" name="categorie" placeholder="ex: Mancare, Gaz..." required>
+            <div class="row g-2 align-items-end" style="display:grid;grid-template-columns:repeat(12,1fr);gap:12px;">
+                <div style="grid-column:span 5;">
+                    <label class="field-label" for="categorie">Categorie</label>
+                    <input id="categorie" type="text" name="categorie" placeholder="ex: Mancare, Gaz..." required>
                 </div>
-                <div class="col-3">
-                    <label style="font-size:0.78rem;color:#6b6b6b;display:block;margin-bottom:4px;">Buget alocat (lei)</label>
-                    <input type="number" name="alocat" placeholder="500" min="0" step="0.01" required>
+                <div style="grid-column:span 4;">
+                    <label class="field-label" for="alocat">Buget alocat (lei)</label>
+                    <input id="alocat" type="number" name="alocat" placeholder="500" min="0" step="0.01" required>
                 </div>
-                <div class="col-2">
-                    <label style="font-size:0.78rem;color:#6b6b6b;display:block;margin-bottom:4px;">Tip</label>
-                    <select name="tip">
+                <div style="grid-column:span 3;">
+                    <label class="field-label" for="tip">Tip</label>
+                    <select id="tip" name="tip">
                         <option value="variabil">Variabil</option>
                         <option value="fix">Fix</option>
                     </select>
                 </div>
-                <div class="col-3 d-flex flex-column gap-1">
+                <div style="grid-column:span 12;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-top:4px;">
                     <div class="recurent-row">
                         <input type="checkbox" name="recurent" id="recurent">
                         <label for="recurent" style="margin:0;cursor:pointer;">Recurenta lunar</label>
                     </div>
-                    <button type="submit" class="btn-add">+ Adauga</button>
+                    <button type="submit" class="btn-add">+ Adauga categorie</button>
                 </div>
             </div>
         </form>
@@ -103,11 +108,11 @@
             const overBudget = b.cheltuit > b.alocat;
             const barClass = overBudget ? 'danger' : (pct > 75 ? '' : 'ok');
         %>
-        <div class="budget-block">
-            <div class="budget-header">
-                <div>
+        <article class="budget-block">
+            <header class="budget-header">
+                <div class="budget-id">
                     <span class="budget-name"><%= b.categorie %></span>
-                    <div class="budget-badges d-inline-flex ms-2">
+                    <div class="budget-badges">
                         <span class="budget-tip"><%= b.tip %></span>
                         <% if (b.recurent) { %><span class="budget-recurent">recurent</span><% } %>
                     </div>
@@ -116,47 +121,49 @@
                     <strong><%= b.cheltuit.toFixed(2) %></strong> / <%= b.alocat.toFixed(2) %> lei
                 </div>
                 <div class="budget-actions">
-                    <button class="btn-edit-toggle" onclick="toggleEdit('<%= b._id %>')">Editeaza</button>
-                    <form method="POST" action="/budget/delete-budget/<%= b._id %>" style="display:inline;" onsubmit="return confirm('Stergi categoria si toate tranzactiile ei?')">
+                    <button type="button" class="btn-edit-toggle" onclick="toggleEdit('<%= b._id %>')">Editeaza</button>
+                    <form method="POST" action="/budget/delete-budget/<%= b._id %>" style="display:inline;margin:0;" onsubmit="return confirm('Stergi categoria si toate tranzactiile ei?')">
                         <input type="hidden" name="luna" value="<%= luna %>">
                         <input type="hidden" name="an" value="<%= an %>">
-                        <button type="submit" class="btn-del">✕</button>
+                        <button type="submit" class="btn-del" aria-label="Sterge categoria">✕</button>
                     </form>
                 </div>
-            </div>
+            </header>
 
             <!-- Edit form -->
             <div class="edit-form" id="edit-<%= b._id %>">
-                <form method="POST" action="/budget/edit-budget/<%= b._id %>" style="display:flex;gap:8px;align-items:center;">
+                <form method="POST" action="/budget/edit-budget/<%= b._id %>" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0;">
                     <input type="number" name="alocat" value="<%= b.alocat %>" min="0" step="0.01" required>
                     <input type="hidden" name="luna" value="<%= luna %>">
                     <input type="hidden" name="an" value="<%= an %>">
-                    <button type="submit" class="btn-save">Salvează</button>
+                    <button type="submit" class="btn-save">Salveaza</button>
                 </form>
             </div>
 
             <!-- Progress bar -->
-            <div class="progress-wrap">
-                <div class="progress-bar <%= barClass %>" style="width: <%= pct %>%"></div>
+            <div class="budget-progress-wrap">
+                <div class="progress-wrap" role="progressbar" aria-valuenow="<%= Math.round(pct) %>" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar <%= barClass %>" style="width: <%= pct %>%"></div>
+                </div>
             </div>
 
             <!-- Tranzactii -->
             <div class="transactions">
                 <% if (b.tranzactii.length === 0) { %>
-                    <p style="font-size:0.8rem;color:#bbb;margin-bottom:0.5rem;">Nicio tranzactie inca.</p>
+                    <p class="tx-empty">Nicio tranzactie inca.</p>
                 <% } %>
                 <% b.tranzactii.forEach(t => { %>
                     <div class="tx-row">
                         <span class="tx-desc">
-                            <%= t.descriere %>
+                            <span class="tx-desc-label"><%= t.descriere %></span>
                             <span class="tx-date"><%= new Date(t.data).toLocaleDateString('ro-RO') %></span>
                         </span>
-                        <div style="display:flex;align-items:center;gap:10px;">
+                        <div class="tx-right">
                             <span class="tx-suma"><%= t.suma.toFixed(2) %> lei</span>
-                            <form method="POST" action="/budget/delete-transaction/<%= t._id %>" style="display:inline;">
+                            <form method="POST" action="/budget/delete-transaction/<%= t._id %>" style="display:inline;margin:0;">
                                 <input type="hidden" name="luna" value="<%= luna %>">
                                 <input type="hidden" name="an" value="<%= an %>">
-                                <button type="submit" class="btn-del">✕</button>
+                                <button type="submit" class="btn-del" aria-label="Sterge tranzactia">✕</button>
                             </form>
                         </div>
                     </div>
@@ -164,20 +171,20 @@
 
                 <form method="POST" action="/budget/add-transaction/<%= b._id %>" class="tx-add-form">
                     <input type="text" name="descriere" placeholder="Descriere" required>
-                    <input type="number" name="suma" placeholder="Lei" min="0" step="0.01" required style="max-width:100px;">
+                    <input type="number" name="suma" placeholder="Lei" min="0" step="0.01" required>
                     <input type="hidden" name="luna" value="<%= luna %>">
                     <input type="hidden" name="an" value="<%= an %>">
                     <button type="submit" class="btn-tx-add">+ Adauga</button>
                 </form>
             </div>
-        </div>
+        </article>
     <% }) %>
 
     <!-- Bottom bar -->
     <div class="bottom-bar">
-        <form method="POST" action="/budget/set-theme" style="display:flex;align-items:center;gap:8px;">
-            <span>Tema:</span>
-            <select name="theme" onchange="this.form.submit()">
+        <form method="POST" action="/budget/set-theme" style="display:flex;align-items:center;gap:8px;margin:0;">
+            <label for="theme-select">Tema:</label>
+            <select id="theme-select" name="theme" onchange="this.form.submit()">
                 <option value="light" <%= theme === 'light' ? 'selected' : '' %>>Light</option>
                 <option value="dark" <%= theme === 'dark' ? 'selected' : '' %>>Dark</option>
             </select>
@@ -192,6 +199,11 @@
     function toggleEdit(id) {
         const el = document.getElementById('edit-' + id);
         el.classList.toggle('open');
+    }
+    function toggleNav(btn) {
+        const nav = document.getElementById('topbarNav');
+        const open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     }
 </script>
 
